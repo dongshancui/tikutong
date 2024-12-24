@@ -15,6 +15,7 @@
     "@bytemd/plugin-gfm": "^1.21.0",
     "@bytemd/plugin-highlight": "^1.21.0",
     "@bytemd/react": "^1.21.0",
+·    "@next/swc-win32-x64-msvc": "^15.1.2",
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "next": "14.2.6",
