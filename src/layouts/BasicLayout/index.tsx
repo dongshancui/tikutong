@@ -19,34 +19,7 @@ import {
 } from "@/api/userController";
 import { setLoginUser } from "@/stores/loginUser";
 import { DEFAULT_USER } from "@/constants/user";
-
-function SearchInput() {
-  return (
-    <div
-      key="SearchOutlined"
-      aria-hidden
-      style={{
-        display: "flex",
-        alignItems: "center",
-        marginInlineEnd: 24,
-      }}
-      onMouseDown={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-      }}
-    >
-      <Input
-        style={{
-          borderRadius: 4,
-          marginInlineEnd: 12,
-        }}
-        prefix={<SearchOutlined />}
-        placeholder="搜索题目"
-        variant="borderless"
-      />
-    </div>
-  );
-}
+import SearchInput from "@/layouts/BasicLayout/components/SearchInput";
 
 interface Props {
   children: React.ReactNode;
@@ -137,7 +110,7 @@ export default function BasicLayout({ children }: Props) {
         actionsRender={(props) => {
           // if (props.isMobile) return [];
           return [
-            <SearchInput key={"search"}></SearchInput>,
+            <SearchInput key={"search"} />,
             <a
               key="github"
               href={"https://chat18.aichatos.xyz/#/chat/1718767851513"}
