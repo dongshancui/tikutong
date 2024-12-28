@@ -12,6 +12,7 @@ import { Button, message, Space, Tag, Typography } from "antd";
 import React, { useRef, useState } from "react";
 import TagList from "@/app/componenets/TagList";
 import MdEditor from "@/app/componenets/MdEditor";
+import UpdateBankModal from "@/app/admin/question/components/UpdateBankModal";
 
 /**
  * 题目管理页面
@@ -23,6 +24,8 @@ const QuestionAdminPage: React.FC = () => {
   const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
   // 是否显示更新窗口
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
+  const [updateBankModalVisible, setUpdateBankModalVisible] =
+    useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   // 当前题目点击的数据
   const [currentRow, setCurrentRow] = useState<API.Question>();
@@ -59,6 +62,12 @@ const QuestionAdminPage: React.FC = () => {
       dataIndex: "id",
       valueType: "text",
       hideInSearch: true,
+      hideInForm: true,
+    },
+    {
+      title: "所属题库",
+      dataIndex: "questionBankId",
+      hideInTable: true,
       hideInForm: true,
     },
     {
@@ -133,6 +142,14 @@ const QuestionAdminPage: React.FC = () => {
           <Typography.Link type="danger" onClick={() => handleDelete(record)}>
             删除
           </Typography.Link>
+          <Typography.Link
+            onClick={() => {
+              setCurrentRow(record);
+              setUpdateBankModalVisible(true);
+            }}
+          >
+            更改所选题库
+          </Typography.Link>
         </Space>
       ),
     },
@@ -198,6 +215,14 @@ const QuestionAdminPage: React.FC = () => {
         }}
         onCancel={() => {
           setUpdateModalVisible(false);
+        }}
+      />
+      <UpdateBankModal
+        style={{ marginTop: 24 }}
+        visible={updateBankModalVisible}
+        questionId={currentRow?.id}
+        onCancel={() => {
+          setUpdateBankModalVisible(false);
         }}
       />
     </PageContainer>

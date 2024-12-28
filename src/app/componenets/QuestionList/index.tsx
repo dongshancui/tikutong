@@ -31,7 +31,7 @@ const QuestionList = (props: Props) => {
                   href={
                     questionBankId
                       ? `/bank/${questionBankId}/question/${item.id}`
-                      : `/questions/${item.id}`
+                      : `/question/${item.id}`
                   }
                 >
                   {item.title}

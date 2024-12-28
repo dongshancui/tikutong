@@ -21,6 +21,7 @@ export default async function BanksPage() {
       sortOrder: "desc",
     });
     questionBankList = res.data.records ?? [];
+    console.log("!!!!");
   } catch (e) {
     console.log(e.message);
   }
@@ -28,6 +29,7 @@ export default async function BanksPage() {
   return (
     <div id="homePage" className={"max-width-content"}>
       <Title level={3}>题库大全</Title>
+
       <QuestionBankList questionBankList={questionBankList}></QuestionBankList>
     </div>
   );
