@@ -1,5 +1,8 @@
 "use client";
-import { listQuestionVoByPageUsingPost } from "@/api/questionController";
+import {
+  listQuestionVoByPageUsingPost,
+  searchQuestionVoByPageUsingPost,
+} from "@/api/questionController";
 import {
   ActionType,
   ProColumns,
@@ -9,6 +12,7 @@ import {
 import TagList from "@/app/componenets/TagList";
 import { useEffect, useRef, useState } from "react";
 import { Form, TablePaginationConfig } from "antd";
+import Link from "next/link";
 
 interface Props {
   defaultQuestionList?: API.QuestionVO[];
@@ -24,7 +28,6 @@ interface Props {
  */
 const QuestionTable: React.FC = (props: Props) => {
   const { defaultQuestionList, defaultTotal, defaultSearchParams = {} } = props;
-  console.log(defaultSearchParams.title);
   const actionRef = useRef<ActionType>();
 
   // 给题目列表设置默认值,用于展示服务端渲染的数据
@@ -54,6 +57,16 @@ const QuestionTable: React.FC = (props: Props) => {
       title: "题目",
       dataIndex: "title",
       valueType: "text",
+      hideInSearch: true,
+      render: (_, record) => {
+        return <Link href={`/question/${record.id}`}>{record.title}</Link>;
+      },
+    },
+    {
+      title: "搜索",
+      dataIndex: "searchText",
+      valueType: "text",
+      hideInTable: true,
     },
     {
       title: "标签",
@@ -63,10 +76,6 @@ const QuestionTable: React.FC = (props: Props) => {
         mode: "tags",
       },
       render: (_, record) => {
-        // TODo:测试
-        // console.log("::" + JSON.stringify(record));
-        // console.log("::" + JSON.stringify(record.tagList));
-        // const tags = JSON.parse(record.tagList || "[]");
         const { tagList } = record;
         return <TagList tagList={tagList}></TagList>;
       },
@@ -102,7 +111,7 @@ const QuestionTable: React.FC = (props: Props) => {
           const sortField = Object.keys(sort)?.[0] || "createTime";
           const sortOrder = sort?.[sortField] || "desc";
 
-          const { data, code } = await listQuestionVoByPageUsingPost({
+          const { data, code } = await searchQuestionVoByPageUsingPost({
             ...params,
             sortField,
             sortOrder,
@@ -114,9 +123,6 @@ const QuestionTable: React.FC = (props: Props) => {
           const newTotal = Number(data.total) || 0;
           setQuestionList(newData);
           setTotal(newTotal);
-
-          // TODO:测试
-          console.log(JSON.stringify(newData));
 
           return {
             success: code === 0,

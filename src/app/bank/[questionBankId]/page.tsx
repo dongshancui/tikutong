@@ -64,7 +64,7 @@ export default async function BankPage({ params }) {
               </Paragraph>
               <Button
                 type={"primary"}
-                href={`bank/${questionBankId}/question/${firstQuestionId}`}
+                href={`/bank/${questionBankId}/question/${firstQuestionId}`}
               >
                 开始刷题
               </Button>

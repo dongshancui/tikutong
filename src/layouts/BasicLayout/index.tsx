@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { ProLayout } from "@ant-design/pro-layout";
 import { Dropdown, Input } from "antd";
-import { GithubFilled, SearchOutlined } from "@ant-design/icons";
+import { GithubFilled, SearchOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import GlobalFooter from "@/app/componenets/GlobalFooter";
 import "./index.css";
@@ -89,6 +89,11 @@ export default function BasicLayout({ children }: Props) {
                 menu={{
                   items: [
                     {
+                      key: "userCenter",
+                      icon: <UserOutlined ined />,
+                      label: "用户中心",
+                    },
+                    {
                       key: "logout",
                       icon: <LogoutOutl ined />,
                       label: "退出登录",
@@ -98,6 +103,8 @@ export default function BasicLayout({ children }: Props) {
                     const { key } = event;
                     if (key === "logout") {
                       userLogout();
+                    } else if (key === "userCenter") {
+                      router.push("/user/center");
                     }
                   },
                 }}
