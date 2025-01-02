@@ -11,7 +11,14 @@ import {
 } from "@ant-design/pro-components";
 import TagList from "@/app/componenets/TagList";
 import { useEffect, useRef, useState } from "react";
-import { Form, TablePaginationConfig } from "antd";
+import {
+  Button,
+  Form,
+  Popconfirm,
+  Space,
+  Table,
+  TablePaginationConfig,
+} from "antd";
 import Link from "next/link";
 
 interface Props {
@@ -72,6 +79,7 @@ const QuestionTable: React.FC = (props: Props) => {
       title: "标签",
       dataIndex: "tagList",
       valueType: "select",
+      hideInSearch: true,
       fieldProps: {
         mode: "tags",
       },
@@ -79,6 +87,16 @@ const QuestionTable: React.FC = (props: Props) => {
         const { tagList } = record;
         return <TagList tagList={tagList}></TagList>;
       },
+    },
+    {
+      title: "创建时间",
+      width: 140,
+      key: "since",
+      dataIndex: "createTime",
+      valueType: "date",
+      search: false,
+      hideInTable: true,
+      hideInSearch: true,
     },
   ];
 

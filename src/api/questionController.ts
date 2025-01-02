@@ -17,6 +17,21 @@ export async function addQuestionUsingPost(
   });
 }
 
+/** batchDeleteQuestion POST /api/question/batch/delete */
+export async function batchDeleteQuestionUsingPost(
+  body: API.QuestionBatchDeleteRequest,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseBoolean_>("/api/question/batch/delete", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** deleteQuestion POST /api/question/delete */
 export async function deleteQuestionUsingPost(
   body: API.DeleteRequest,
